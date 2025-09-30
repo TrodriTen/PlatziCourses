@@ -52,7 +52,7 @@ Procesos que ocurren desde que se enciende el computador hasta que carga el sist
 ### Relación entre Velocidad, Electricidad y Calor
 
 $$
-  + Hz = + V = + A = + C
+  +Hz = +V = +A = +C
 $$
 
 - Mayor cantidad de ciclos es igual a mas velocidad del procesador que es igual a que el procesador recibe mas corriente y por ende, este genera mas calor. 
