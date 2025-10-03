@@ -66,6 +66,7 @@ $rm -rf directory
 
   + **mkdir** (sirve para crear un nuevo directorio)
   + **mkdir "nombre1" "nombre2"** (sirve para crear varios directorios a la vez)
+  + **mkdir -p "nombre1/nombre2** (Crear recursivamente directorios dentro de otro creado)
   + **touch** (sirve para crear archivos)
 
 ### Copia de archivos
@@ -80,6 +81,8 @@ $rm -rf directory
   + **head "archivo" -n "numero deseado"** e(sto muestra la cantidad de líneas que deseas visualizar del inicio)
   + **tail "archivo"** (muestra las últimas líneas de un archivo)
   + **tail "archivo" -n "numero deseado"** (esto muestra la cantidad de líneas que deseas visualizar del final)
+  + **nl "nombre_archivo"** (Comando que muestra la cantidad de lineas que tiene un archivo dado)
+  + **awk -F ',' {print $columna, $columna} "nombre_archivo"** (Obtener la informacion de csv por columnas dado el separador de la coma)
 
 ### Busqueda en archivos en Terminal
 
@@ -90,6 +93,15 @@ $rm -rf directory
   + **find "ruta" -type f -name \*.log**
   + **find "ruta" -size "valor y unidad de medida"**
   + Se pueden usar wildcards y el pipe operator para filtrar y gestionar los resultados (**Se veran mas adelante**)
+
+### Manejador de paquetes
+
+  + Depende de la distribucion de linux que se esta usando, algunos son `apt`, `yum` y `pacman`
+  + **sudo apt-get update** (Escanea los repositorios para ver cuales paquetes se pueden actualizar)
+  + **sudo apt upgrade -y** (Actualizar los paquetes)
+  + **sudo apt install "paquete"** (Instalar paquetes)
+  + **sudo apt remove "paquete"** (Desinstalar un paquete)
+  + **sudo apt purge "paquete"** (Purga en totalidad los paquetes y dependencias)
 
 #### Usando el comando grep
 
@@ -153,6 +165,14 @@ $grep -vm 5 "palabra" "archivo"
 
 ### Procesos del computador
 
+#### Procesos de Foreground and Background
+
+- **sleep** (Es un comando el cual indica por cuanto tiempo queremos que la terminal "duerma")
+- Colocando un `&` al final del comando, se envia la ejecucion de un proceso al backgournd
+- **fg %PID del proceso** (Enviar comandos a foreground)
+- **ctrl + z** (Pausar procesos de comandos en background)
+- **bg %PID del proceso** (Reanudar la ejecucion del proceso en background)
+
 #### Visualización de Procesos
 - **ps** (Este comando se usa para ver los procesos activos en la terminal.)
   + **ps aux** (Muestra todos los procesos en ejecución con detalles completos.)
@@ -189,6 +209,7 @@ $kill -l
         * `-c` limita la cantidad de paquetes enviados.
         * `-s` especifica el tamaño de los paquetes.
   + **ifconfig y netstat** (son comandos que permiten visualizar y controlar la configuración de red del sistema, incluyendo máscaras de red, puertos de transmisión y configuración de tarjetas de red.)
+  + **ip** (comando para concer las interfaces de red y otras mas funcionalidades segun el flag usado)
   + **curl** (es una herramienta de línea de comandos para transferir datos con URLs. Permite traer el HTML de una página web, que puede ser guardado utilizando redirección de salida estándar.)
   + **wget** (es una herramienta para descargar contenido desde la web. Es similar a `curl`, pero se especializa en descargar archivos.)
   + **traceroute** (muestra la ruta que toman los paquetes desde el host local hasta el host de destino especificado. Proporciona una lista de los enrutadores que los paquetes atraviesan, lo cual es útil para diagnosticar problemas de red.)
@@ -261,9 +282,9 @@ $kill -l
 ### Eliminacion de archivos o directorios permanentemente
 
   + **rm** (sirve para eliminar un archivo/directorio)
-  + **rm -r** (sirve para eliminar)
+  + **rm -r** (sirve para eliminar recursivamente)
   + **rmdir o rm -d** (borra un directorio)
-  + **rm -i** (sirve para borrar recursivamente)
+  + **rm -i** (sirve para borrar con una verificacion)
   + **rm -rf** (obliga al archivo a borrarse (**Ojo te puedes cargar tu sistema operativo con este comando si no escribes bien el comando**))
   + **rm -ri** (sirve para borrar lo que está en un directorio y el directorio)
 
@@ -272,23 +293,23 @@ $kill -l
   + **Ctrl + c** (sirve para matar cualquier programa)
   + **q** (para hacerle quit a las ejecuciones de consola)
 
-### Comprimiendo y Descomprimiendo Archivos TAR y ZIP
+### Empaquetando y Desempaquetando Archivos TAR y ZIP
 
 #### Comprimiendo archivos TAR
 - **tar -c** (seguido del nombre del archivo `.tar` crea un nuevo archivo tar.)
-- **tar -cf "nombre archivo".tar** (indica que se está comprimiendo un archivo y se especifica el nombre.)
-- **tar -cvf "nombre archivo".tar** (muestra en detalle (verbose) lo que se está comprimiendo.)
-- **tar -cvf "nombre".tar "archivos"** (combina las opciones de compresión, verbosidad y archivo.)
-- **tar -czvf "nombre archivo".tar.gz** (comprime y utiliza gzip para manejar archivos más grandes.)
-- **tar -czvf "nombre".tar.gz "archivos"** (detalla la operación de compresión con gzip, verbosidad y archivo especificado.)
+- **tar -cf "nombre archivo".tar** (indica que se está empaquetando un archivo y se especifica el nombre.)
+- **tar -cvf "nombre archivo".tar** (muestra en detalle (verbose) lo que se está empaquetando.)
+- **tar -cvf "nombre".tar "archivos"** (combina las opciones de empaquetado, verbosidad y archivo.)
+- **tar -czvf "nombre archivo".tar.gz** (comprime y utiliza gzip para manejar archivos más grandes.) $\longrightarrow$ (compresion)
+- **tar -czvf "nombre".tar.gz "archivos"** (detalla la operación de compresión con gzip, verbosidad y archivo especificado.) $\longrightarrow$ (compresion)
 
 #### Descomprimiendo archivos TAR
-- **tar -x "nombre archivo".tar** (descomprime un archivo tar.)
-- **tar -xf "nombre archivo".tar** (indica que se está descomprimiendo un archivo y se especifica el nombre.)
-- **tar -xvf "nombre archivo".tar** (muestra en detalle (verbose) lo que se está descomprimiendo.)
-- **tar -xvf "nombre".tar "archivos"** (combina las opciones de descompresión, verbosidad y archivo.)
-- **tar -xzvf "nombre archivo".tar.gz** (descomprime y maneja archivos comprimidos con gzip.)
-- **tar -xzvf "nombre".tar.gz "archivos"** (detalla la operación de descompresión con gzip, verbosidad y archivo especificado.)
+- **tar -x "nombre archivo".tar** (desempaquetado un archivo tar.)
+- **tar -xf "nombre archivo".tar** (indica que se está desempaquetando un archivo y se especifica el nombre.)
+- **tar -xvf "nombre archivo".tar** (muestra en detalle (verbose) lo que se está desempaquetando.)
+- **tar -xvf "nombre".tar "archivos"** (combina las opciones de desempaquetado, verbosidad y archivo.)
+- **tar -xzvf "nombre archivo".tar.gz** (descomprime, desempaqueta y maneja archivos comprimidos con gzip.) $\longrightarrow$ (descompresion)
+- **tar -xzvf "nombre".tar.gz "archivos"** (detalla la operación de descompresión con gzip, verbosidad y archivo especificado.) $\longrightarrow$ (descompresion)
 
 #### Comprimiendo archivos ZIP
 - **zip "nombre archivo".zip** (comprime archivos individuales en un archivo zip.)
@@ -328,6 +349,13 @@ este comando busca únicamente lo que inicie con mayúscula.
 $ls [ad]*
 ````
 esto muestra los archivos que inician con las letras a y d.
+
+### Ejemplos
+
+```bash
+ls *.{log, md}
+```
+
 
 ## Sistema de redirecciones
 
@@ -456,6 +484,7 @@ $chmod u+r mitexto.txt
   + `$PATH`: tiene todas las rutas donde se encuentran los binarios que ejecuta nuestro sistema. Hay varios manejadores de paquetes para binarios, pero no siempre se agregan a `PATH`, y se deben agregar manualmente.
     * En `HOME`, existe un archivo que se llama `.bashrc` donde está nuestra configuración de Bash. Lo podemos abrir con VS Code para modificarlo.
 - **alias "nombre"="comando"** (para crear un alias útil.)
+- **export $variable** (para exportar las variables de entorno a otros programas se usa el comando `export`)
 - Para modificar o crear una variable de entorno, se hace, por ejemplo: `PLATZI_MESSAGE='Hola amigos'` (la variable se pone en mayúsculas).
 - Para agregar una ruta a la variable `PATH`, ponemos en `.bashrc`: `PATH=$PATH:<ruta>`, guardamos y cargamos bash en la terminal.
 
